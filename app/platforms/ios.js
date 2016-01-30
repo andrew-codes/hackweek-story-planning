@@ -5,56 +5,42 @@ import React, {
   Text,
   View
 } from 'react-native';
-import Button from 'react-native-button';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider, connect } from 'react-redux';
-// import thunk from 'redux-thunk';
-window.navigator.userAgent = 'react-native';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import createSocketIoMiddleware from 'redux-socket.io';
-var io = require('socket.io-client/socket.io');
-import {Reducer as StoryPlanning, ActionCreators} from './app/features/StoryPlanning';
+import io from 'socket.io-client';
+import {Reducer as StoryPlanning, ActionCreators} from './features/StoryPlanning';
 
 const socket = io('http://localhost:3000');
 const socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
-const createStoreWithMiddleware = applyMiddleware(socketIoMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk, socketIoMiddleware)(createStore);
 
 const reducers = {
-    StoryPlanning
+    StoryPLanning
 };
 const reducer = combineReducers(reducers);
 
-const store = createStoreWithMiddleware(reducer, {StoryPlanning: {
-    count: 0
-}
-});
-const countMe = (count) => store.dispatch(ActionCreators.increment(count));
-class App extends Component {
+const store = createStoreWithMiddleware(reducer);
+
+const countMe = () => store.dispatch(ActionCreators.increment());
+class StoryPlanning extends Component {
   render() {
     return (
+        <Provider store={store}>
           <View style={styles.container}>
             <Text style={styles.welcome}>
               Welcome to React Native!
             </Text>
-            <Button onPress={countMe.bind(this, this.props.count)}>Count me In!</Button>
-            <Text>Count: {this.props.count}</Text>
+            <button onClick={countMe}>Count me In!</button>
             <Text style={styles.instructions}>
                 Press Cmd+R to reload,{'\n'}
               Cmd+D or shake for dev menu
             </Text>
           </View>
+      </Provider>
     );
   }
-}
-
-const ConnectedApp = connect(state=>({
-    count: state.StoryPlanning.count}))(App);
-
-class Root extends Component{
-    render(){
-        return (<Provider store={store}>
-            <ConnectedApp />
-            </Provider>);
-    }
 }
 
 const styles = () => StyleSheet.create({
@@ -76,4 +62,4 @@ const styles = () => StyleSheet.create({
   },
 })();
 
-AppRegistry.registerComponent('StoryPlanning', () => Root);
+AppRegistry.registerComponent('StoryPlanning', () => StoryPlanning);

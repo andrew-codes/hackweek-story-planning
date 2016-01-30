@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   AppRegistry,
   Component,
@@ -10,9 +5,18 @@ import React, {
   Text,
   View
 } from 'react-native';
+window.navigator.userAgent = 'react-native';
+var io = require('socket.io-client/socket.io');
 
 class StoryPlanning extends Component {
+    constructor(props, context){
+        super(props, context);
+        this.socket = io('71.204.0.72:3000', {jsonp: false});
+        this.socket.emit('message', 'am I connected?');
+    }
+
   render() {
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
