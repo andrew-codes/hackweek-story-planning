@@ -1,0 +1,10 @@
+{
+  "verbose": false,
+  "ignore": [
+    "app/featuers",
+    "app/platforms"
+  ],
+  "execMap": {
+    "js": "babel-node"
+  }
+}

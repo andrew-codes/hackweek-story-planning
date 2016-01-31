@@ -14,7 +14,7 @@ import createSocketIoMiddleware from 'redux-socket.io';
 var io = require('socket.io-client/socket.io');
 import {Reducer as StoryPlanning, ActionCreators} from './app/features/StoryPlanning';
 
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:3000/StoryPlanning');
 const socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
 const createStoreWithMiddleware = applyMiddleware(socketIoMiddleware)(createStore);
 
@@ -47,7 +47,8 @@ class App extends Component {
 }
 
 const ConnectedApp = connect(state=>({
-    count: state.StoryPlanning.count}))(App);
+    count: state.StoryPlanning.count
+}))(App);
 
 class Root extends Component{
     render(){
