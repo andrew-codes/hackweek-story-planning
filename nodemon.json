@@ -4,9 +4,8 @@
         ".git",
         "node_modules",
         "app/featuers",
-        "app/components",
-        "*.js"
-    ],
+        "app/components"
+	],
     "execMap": {
         "js": "babel-node"
     }

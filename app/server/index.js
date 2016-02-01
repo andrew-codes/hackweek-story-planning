@@ -1,10 +1,11 @@
 import App from 'koa';
 import IO from 'koa-socket';
-//import StoryPlanning from './../features/StoryPlanning/server';
-//import Security from './../features/Security/server';
+import ActionCreators from './ActionCreators';
 
 const  app = new App();
 const socket = new IO('VersionOne');
+
+const cleanActionTypeText = (text) => text.replace('server/', '');
 
 socket.attach(app);
 
@@ -18,7 +19,11 @@ socket.on('disconnect', ctx => {
 
 socket.on('action', ctx => {
     console.log('Action received', ctx.data.type, ctx.data.payload);
-    // socket.broadcast('action', actionCreators.login(ctx.data.payload));
+	let actionCreator = ActionCreators[cleanActionTypeText(ctx.data.type)];
+	if (!actionCreator){
+		return;
+	}
+	socket.broadcast('action', actionCreator(ctx.data.payload));
 });
 
 const port = 3000;

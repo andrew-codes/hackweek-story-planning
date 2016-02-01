@@ -7,6 +7,11 @@ export const container = () => ({
 	alignItems: 'center'
 });
 
+export const fromEdge = (pixels = 13) => ({
+	marginLeft: pixels,
+	marginRight: pixels
+});
+
 export const align = (x, y) => ({
 	justifyContent: y,
 	alignSelf: 'stretch',
@@ -16,8 +21,7 @@ export const align = (x, y) => ({
 export const textField = (height = 40) => ({
 	height,
 	margin: 7,
-	marginLeft: 13,
-	marginRight: 13,
+	...fromEdge(),
 	padding: 7
 });
 export const button = () =>({
@@ -29,5 +33,6 @@ export const primaryButton = () => ({
 	...button(),
 	backgroundColor: Styles.Palette.primary,
 	color: '#fff',
-	margin: 7
+	margin: 7,
+	...fromEdge()
 });

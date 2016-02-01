@@ -1,6 +1,6 @@
 import * as actions from './../actions';
-import authenticateToServer from './authenticateToServer';
+import authenticate from './authenticate';
 
 export default ({username, password}) => dispatch => {
-    dispatch(authenticateToServer({username, password}));
+    dispatch(authenticate({username, password}));
 }

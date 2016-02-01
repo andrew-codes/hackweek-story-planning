@@ -1,17 +1,19 @@
 import {
-    login
+	authenticate as key
 }
 from './../actions';
 
 export default {
-    [login]: (state, action) => {
+    [key]: (state, action) => {
         const {
             payload: {
-                isLoggedIn
+                isLoggedIn,
+				username
             }
         } = action;
         return {
             ...state,
+			username,
             isLoggedIn
         };
     }
