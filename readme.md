@@ -13,8 +13,9 @@
 
 ## Running in Simulator
 
-1. Open the Xcode project `./ios/StoryPlanning.xcodeproj`
-2. Hit ⌘-R in iOS simulator
+1. `npm install && npm start`
+2. Open the Xcode project `./ios/StoryPlanning.xcodeproj`
+3. Hit ⌘-R in iOS simulator
 
 ## Running on Device
 See [Running on Device](http://facebook.github.io/react-native/docs/running-on-device-ios.html#content)
