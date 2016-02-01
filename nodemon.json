@@ -1,10 +1,13 @@
 {
-  "verbose": false,
-  "ignore": [
-    "app/featuers",
-    "app/platforms"
-  ],
-  "execMap": {
-    "js": "babel-node"
-  }
+    "verbose": false,
+    "ignore": [
+        ".git",
+        "node_modules",
+        "app/featuers",
+        "app/components",
+        "*.js"
+    ],
+    "execMap": {
+        "js": "babel-node"
+    }
 }

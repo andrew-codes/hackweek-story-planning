@@ -1,4 +1,4 @@
-import * as actions from './../../actions';
+import * as actions from './../actions';
 import incrementCreator from './increment';
 import {createAction} from 'redux-actions';
 

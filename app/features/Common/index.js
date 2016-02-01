@@ -1,1 +1,2 @@
-export const createServerActionCreator = createAction => (actionType, payload) => createAction(`server/${actionType}`, payload);
+import * as reduxUtils from './reduxUtils';
+export const ReduxUtils = reduxUtils;

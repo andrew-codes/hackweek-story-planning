@@ -1,5 +1,5 @@
 import IO from 'koa-socket';
-import * as actionCreators from './ActionCreators';
+import * as actionCreators from './../ActionCreators/server';
 
 export default (app) => {
     const socket = new IO('StoryPlanning');
@@ -15,7 +15,6 @@ export default (app) => {
 
     socket.on('action', ctx => {
         console.log('Action received', ctx.data.type, ctx.data.payload);
-        console.log(actionCreators.increment(ctx.data.payload))
         socket.broadcast('action', actionCreators.increment(ctx.data.payload));
     });
 

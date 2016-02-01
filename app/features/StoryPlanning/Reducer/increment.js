@@ -7,7 +7,7 @@ export default {
     [increment]: (state = {count: 0}, action) => {
         return {
             ...state,
-            count: action.payload
+            count: ++action.payload
         };
     }
 };
