@@ -1,8 +1,9 @@
 import React, {
-  AppRegistry
-} from 'react-native';
-import ProviderRoot from './app/components/ProviderRoot';
-import IOS from './app/components/containers/IOS';
+    AppRegistry
+}
+from 'react-native';
+import ProviderRoot from './app/native/ProviderRoot';
+import Router from './app/native/Router';
 import {
     combineReducers
 }
@@ -12,19 +13,28 @@ import {
 }
 from './app/features/Common';
 import {
-    Reducer as StoryPlanning, ActionCreators
+    Reducer as StoryPlanning,
+    feature as StoryPlanningFeature
 }
 from './app/features/StoryPlanning';
+import {
+    Reducer as Security
+}
+from './app/features/Security';
 
 const reducers = {
-    StoryPlanning
+    StoryPlanning,
+    Security
 };
 const reducer = combineReducers(reducers);
 
-const store = ReduxUtils.createStore('http://localhost:3000/StoryPlanning')(reducer, {
+const store = ReduxUtils.createStore('http://localhost:3000/VersionOne')(reducer, {
     StoryPlanning: {
         count: 0
+    },
+    Security: {
+        isLoggedIn: false
     }
 });
 
-AppRegistry.registerComponent('StoryPlanning', () => ProviderRoot(store)(IOS));
+AppRegistry.registerComponent('StoryPlanning', () => ProviderRoot(store)(Router));
