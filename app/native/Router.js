@@ -5,16 +5,22 @@ import React, {
   View,
   Navigator
 } from 'react-native';
-import {Router, Route, Animations, Schema} from 'react-native-router-flux';
+import {Router, Route, Animations, Schema, Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {NavBar, NavBarModal} from './Navbar';
 import Login from './Login';
 import Home from './containers/Home';
 
 class AppRouter extends React.Component {
+	componentWillReceiveProps(nextProps){
+		if (nextProps.isLoggedIn){
+			nextProps.actions.home();
+		}
+	}
+
     render() {
         const {
-            isLoggedIn
+            isLoggedIn,
         } = this.props;
         return (
             <Router hideNavBar={true}>
@@ -31,4 +37,7 @@ class AppRouter extends React.Component {
 const mapStateToProps = state => ({
     isLoggedIn: state.Security.isLoggedIn
 });
-export default connect(mapStateToProps)(AppRouter);
+const mapActionsToProps = dispatch => ({
+    actions: Actions
+});
+export default connect(mapStateToProps, mapActionsToProps)(AppRouter);

@@ -1,3 +1,3 @@
-import loginCreator from './login';
+import authenticateCreator from './authenticate';
 
-export const login = loginCreator;
+export const authenticate = authenticateCreator;

@@ -1,20 +1,22 @@
 import {
-    saveCredentials
+	saveCredentials as key
 }
 from './../actions';
 
 export default {
-    [saveCredentials]: (state, action) => {
+    [key]: (state, action) => {
         const {
             payload: {
-                username,
-                password
+                isLoggedIn,
+				username,
+				password
             }
         } = action;
         return {
             ...state,
-            username,
-            password
+			username,
+			password,
+            isLoggedIn
         };
     }
 };

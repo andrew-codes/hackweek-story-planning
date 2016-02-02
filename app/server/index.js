@@ -1,8 +1,13 @@
-import App from 'koa';
+import Koa from 'koa';
 import IO from 'koa-socket';
+import co from 'co';
+import bodyParser from 'koa-bodyparser';
 import ActionCreators from './ActionCreators';
+import api from './api';
 
-const  app = new App();
+let app = new Koa();
+app.use(bodyParser());
+app = api(app);
 const socket = new IO('VersionOne');
 
 const cleanActionTypeText = (text) => text.replace('server/', '');

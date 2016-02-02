@@ -24,7 +24,7 @@ export class Login extends Component {
 	render() {
 		const {
 			actions: {
-				login
+				authenticate
 				}
 			} = this.props;
 		return (
@@ -40,7 +40,7 @@ export class Login extends Component {
 							   onChangeText={(text) => this.setState({password: text})} value={this.state.password} />
 					<View style={styles.buttonContainer}>
 						<Button style={styles.primaryButton}
-								onPress={login.bind(this, {username: this.state.username, password: this.state.password})}>Login</Button>
+								onPress={authenticate.bind(this, {username: this.state.username, password: this.state.password})}>Login</Button>
 					</View>
 				</View>
 			</View>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({});
 const mapActionsToProps = dispatch => ({
 	actions: {
-		login: bindActionCreators(SecurityActionCreators.login, dispatch)
+		authenticate: bindActionCreators(SecurityActionCreators.authenticate, dispatch)
 	}
 });
 export default connect(mapStateToProps, mapActionsToProps)(Login);
