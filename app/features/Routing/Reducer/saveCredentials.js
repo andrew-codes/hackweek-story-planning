@@ -6,9 +6,6 @@ export default {
 		const {
 			payload
 			} = action;
-		return state.merge(payload)
-			.merge({
-				isLoggedIn: true
-			});
+		return state.merge(payload);
 	}
 };

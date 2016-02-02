@@ -1,9 +1,12 @@
 import React, { AppRegistry } from 'react-native';
-import ProviderRoot from './app/native/ProviderRoot';
+import withProvider from './app/native/wrappers/withProvider';
 import Router from './app/native/Router';
 import createStore from './app/createStore';
-import initializeNativeApp from './app/initialNativeApp';
-const store = createStore();
-initializeNativeApp(store);
-
-AppRegistry.registerComponent('StoryPlanning', () => ProviderRoot(store)(Router));
+import {ActionCreators as SecurityActionCreators} from './app/features/Security';
+const store = createStore({
+	Security: {
+		isLoggedIn: false,
+		isAuthenticationInProgress: false
+	}
+});
+AppRegistry.registerComponent('StoryPlanning', () => withProvider(store)(Router));

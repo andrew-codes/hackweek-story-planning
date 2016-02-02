@@ -1,14 +1,15 @@
 import {authenticate as key} from './../actions';
 import {createAction} from 'redux-actions';
-import {ReduxUtils} from './../../Common';
 import saveCredentials from './saveCredentials';
 
 export default ({username, password}) => (dispatch, getState) => {
+	if (!username || username === 'null' || !password || password === 'null') {
+		return;
+	}
 	const state = getState();
-	//if (state.Security.isLoggedIn){
-	//	return;
-	//}
-	console.log('hit');
+	if (state.getIn(['Security', 'isLoggedIn'])) {
+		return;
+	}
 	return fetch('http://localhost:3000/api/authenticate', {
 		method: 'POST',
 		headers: {

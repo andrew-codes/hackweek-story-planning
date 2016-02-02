@@ -1,10 +1,9 @@
-import Immutable from 'immutable';
+import {Map} from 'immutable';
 import * as actions from './actions';
 
 export default () => {
-	return Immutable.fromJS({
+	return Map({
 		Security: {
-			isAuthenticationInProgress: false,
 			isLoggedIn: false,
 			username: null,
 			password: null

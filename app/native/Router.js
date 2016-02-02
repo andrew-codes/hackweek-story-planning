@@ -1,43 +1,37 @@
 import React, {
-  Component,
-  StyleSheet,
-  Text,
-  View,
-  Navigator
+	Component,
+	StyleSheet,
+	Text,
+	View,
+	Navigator
 } from 'react-native';
 import {Router, Route, Animations, Schema, Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-import {NavBar, NavBarModal} from './Navbar';
+import withToolbar from './wrappers/withToolbar';
+import secureScreen from './wrappers/secureScreen';
 import Login from './Login';
 import Home from './containers/Home';
+import Launch from './Launch';
 
 class AppRouter extends React.Component {
-	componentWillReceiveProps(nextProps){
-		if (!nextProps.isLoggedIn){
-			nextProps.actions.login();
-		}
+	render() {
+		return (
+			<Router hideNavBar={true}>
+				<Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} />
+				<Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
+				<Schema name="withoutAnimation" />
+				<Route name="login" component={Login} hideNavBar={true} wrapRouter={true} title="Login"
+					   schema="withoutAnimation" />
+				<Route name="home" component={withToolbar(Home)} hideNavBar={true} wrapRouter={true}
+					   title="Story Planner" schema="withoutAnimation" />
+				<Route name="launch" component={Launch} initial={true} hideNavBar={true} wrapRouter={true} schema="withoutAnimation"
+					   title="Launching Story Planner" />
+			</Router>
+		);
 	}
-
-    render() {
-        const {
-            isLoggedIn,
-        } = this.props;
-        return (
-            <Router hideNavBar={true}>
-                <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
-                <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-                <Schema name="withoutAnimation"/>
-                <Route name="login" component={Login} hideNavBar={true} wrapRouter={true} title="Login" schema="modal"/>
-                <Route name="home" component={Home} initial={true} hideNavBar={false} wrapRouter={true} title="Story Planner"/>
-            </Router>
-        );
-    }
 }
 
 const mapStateToProps = state => ({
-    isLoggedIn: state.getIn(['Security', 'isLoggedIn'])
+	isLoggedIn: state.getIn(['Security', 'isLoggedIn'])
 });
-const mapActionsToProps = dispatch => ({
-    actions: Actions
-});
-export default connect(mapStateToProps, mapActionsToProps)(AppRouter);
+export default connect(mapStateToProps)(AppRouter);

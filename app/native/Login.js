@@ -1,10 +1,4 @@
-import React, {
-	Component,
-	StyleSheet,
-	Text,
-	View,
-	TextInput
-} from 'react-native';
+import React, { PropTypes, Component, StyleSheet, Text, View, TextInput } from 'react-native';
 import Button from 'react-native-button';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
@@ -12,7 +6,16 @@ import {bindActionCreators} from 'redux';
 import {ActionCreators as SecurityActionCreators} from './../features/Security';
 import * as Styles from './styles';
 
+const login = function() {
+	this.props.actions.login({username: this.state.username, password: this.state.password});
+};
 export class Login extends Component {
+	static propTypes = {
+		actions: PropTypes.shape({
+			login: PropTypes.func.isRequired
+		}).isRequired
+	};
+
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -22,11 +25,6 @@ export class Login extends Component {
 	}
 
 	render() {
-		const {
-			actions: {
-				authenticate
-				}
-			} = this.props;
 		return (
 			<View style={styles.container}>
 				<View style={styles.welcomeWrapper}>
@@ -36,11 +34,12 @@ export class Login extends Component {
 					<TextInput placeholder="username" style={styles.textInput} autoCapitalize='none' autoCorrect={false}
 							   onChangeText={(text) => this.setState({username: text})}
 							   value={this.state.username} />
-					<TextInput placeholder="password" style={styles.textInput} autoCapitalize='none' autoCorrect={false} secureTextEntry={true}
+					<TextInput placeholder="password" style={styles.textInput} autoCapitalize='none' autoCorrect={false}
+							   secureTextEntry={true}
 							   onChangeText={(text) => this.setState({password: text})} value={this.state.password} />
 					<View style={styles.buttonContainer}>
 						<Button style={styles.primaryButton}
-								onPress={authenticate.bind(this, {username: this.state.username, password: this.state.password})}>Login</Button>
+								onPress={login.bind(this)}>Login</Button>
 					</View>
 				</View>
 			</View>
@@ -80,8 +79,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({});
 const mapActionsToProps = dispatch => ({
+	homeScreen: Actions.home,
 	actions: {
-		authenticate: bindActionCreators(SecurityActionCreators.authenticate, dispatch)
+		login: bindActionCreators(SecurityActionCreators.login, dispatch)
 	}
 });
 export default connect(mapStateToProps, mapActionsToProps)(Login);
