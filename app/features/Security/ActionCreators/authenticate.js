@@ -8,6 +8,7 @@ export default ({username, password}) => (dispatch, getState) => {
 	//if (state.Security.isLoggedIn){
 	//	return;
 	//}
+	console.log('hit');
 	return fetch('http://localhost:3000/api/authenticate', {
 		method: 'POST',
 		headers: {

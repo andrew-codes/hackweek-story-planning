@@ -1,11 +1,8 @@
+import initializeState from './../initializeState';
+
 import increment from './increment';
-import {
-    handleActions
-}
-from 'redux-actions'
+import { handleActions} from 'redux-actions'
 
 export default handleActions({
-    ...increment
-}, {
-    count: 0
-});
+	...increment
+}, initializeState());

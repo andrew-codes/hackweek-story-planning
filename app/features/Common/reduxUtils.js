@@ -1,16 +1,21 @@
 import {
-    createStore as reduxCreateStore, applyMiddleware, combineReducers
+	createStore as reduxCreateStore, applyMiddleware, combineReducers
 }
-from 'redux';
+	from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
-window.navigator.userAgent = 'react-native';
-import createSocketIoMiddleware from 'redux-socket.io';
-var io = require('socket.io-client/socket.io');
+import {isApp} from './env';
 
 export const createProxyActionCreator = createAction => (actionType, payload) => createAction(`server/${actionType}`, payload);
 
 export const createStore = url => {
-    const socketIoMiddleware = createSocketIoMiddleware(io(url), 'server/');
-    return applyMiddleware(thunk, promise, socketIoMiddleware)(reduxCreateStore);
+	const middlewares = [thunk, promise];
+	if (isApp) {
+		window.navigator.userAgent = 'react-native';
+		const createSocketIoMiddleware = require('redux-socket.io');
+		const io = require('socket.io-client/socket.io');
+		const socketIoMiddleware = createSocketIoMiddleware(io(url), 'server/');
+		middlewares.push(socketIoMiddleware);
+	}
+	return applyMiddleware(...middlewares)(reduxCreateStore);
 };

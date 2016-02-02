@@ -1,4 +1,3 @@
-export {default as feature} from './feature';
 export {default as Reducer} from './Reducer';
 
 import * as actionCreators from './ActionCreators';

@@ -13,8 +13,8 @@ import Home from './containers/Home';
 
 class AppRouter extends React.Component {
 	componentWillReceiveProps(nextProps){
-		if (nextProps.isLoggedIn){
-			nextProps.actions.home();
+		if (!nextProps.isLoggedIn){
+			nextProps.actions.login();
 		}
 	}
 
@@ -27,15 +27,15 @@ class AppRouter extends React.Component {
                 <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
                 <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
                 <Schema name="withoutAnimation"/>
-                <Route name="login" component={Login} initial={!isLoggedIn} hideNavBar={true} wrapRouter={true} title="Login"/>
-                <Route name="home" component={Home} initial={isLoggedIn} hideNavBar={false} wrapRouter={true} title="Story Planner"/>
+                <Route name="login" component={Login} hideNavBar={true} wrapRouter={true} title="Login" schema="modal"/>
+                <Route name="home" component={Home} initial={true} hideNavBar={false} wrapRouter={true} title="Story Planner"/>
             </Router>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    isLoggedIn: state.Security.isLoggedIn
+    isLoggedIn: state.getIn(['Security', 'isLoggedIn'])
 });
 const mapActionsToProps = dispatch => ({
     actions: Actions

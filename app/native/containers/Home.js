@@ -4,7 +4,7 @@ import {ActionCreators as StoryPlanningActionCreators} from './../../features/St
 import Home from './../Home';
 
 const mapStateToProps = state => ({
-    count: state.StoryPlanning.count
+    count: state.getIn(['StoryPlanning', 'counter'])
 });
 const mapActionsToProps = dispatch => ({
     actions: bindActionCreators(StoryPlanningActionCreators, dispatch)
