@@ -12,6 +12,11 @@ export const fromEdge = (pixels = 13) => ({
 	marginRight: pixels
 });
 
+export const padEdge = (pixels = 13) => ({
+	paddingLeft: pixels,
+	paddingRight: pixels
+});
+
 export const align = (x, y) => ({
 	justifyContent: y,
 	alignSelf: 'stretch',

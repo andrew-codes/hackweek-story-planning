@@ -9,7 +9,7 @@ class Toolbar extends React.Component {
 	render() {
 		return (
 			<View style={styles.toolbar}>
-				<Text style={styles.toolbarButton}>Add</Text>
+				<Text style={styles.toolbarButton}>Something</Text>
 				<Text style={styles.toolbarTitle}>This is the title</Text>
 				<Button style={styles.toolbarButton} onPress={this.props.logout}>Logout</Button>
 			</View>
@@ -39,7 +39,8 @@ export default WrappedComponent => class extends Component {
 
 const styles = StyleSheet.create({
 	toolbar: {
-		backgroundColor: '#81c04d',
+		...Styles.Common.padEdge(),
+		backgroundColor: Styles.Common.Palette.logoPrimary,
 		paddingTop: 30,
 		paddingBottom: 10,
 		flexDirection: 'row'

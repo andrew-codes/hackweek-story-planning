@@ -8,7 +8,6 @@ import React, {
 import {Router, Route, Animations, Schema, Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import withToolbar from './wrappers/withToolbar';
-import secureScreen from './wrappers/secureScreen';
 import Login from './Login';
 import Home from './containers/Home';
 import Launch from './Launch';
