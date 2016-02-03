@@ -1,23 +1,17 @@
 import React, { Component, StyleSheet, Text, View } from 'react-native';
 import Button from 'react-native-button';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {ActionCreators as StoryPlanningActionCreators} from './../features/StoryPlanning';
 import * as Styles from './styles';
 
-const countMe = function() {
-	this.props.actions.increment(this.props.count);
-};
-export default class extends Component {
+export class Home extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text style={styles.welcome}>
-					Welcome to React Native!
-				</Text>
-				<Button onPress={countMe.bind(this)}>Count me In!</Button>
-				<Text>Count: {this.props.count}</Text>
-				<Text style={styles.instructions}>
-					Press Cmd+R to reload,{'\n'}
-					Cmd+D or shake for dev menu
-				</Text>
+				<View style={styles.gameActionsContainer}>
+					<Button style={styles.startGameButton}>Start a Game</Button>
+				</View>
 			</View>
 		);
 	}
@@ -25,17 +19,24 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		...Styles.Common.container(),
-		backgroundColor: '#F5FCFF'
+		...Styles.Common.verticalContainer(),
+		flexDirection: 'column',
+		backgroundColor: Styles.Common.Palette.lightGray
 	},
-	welcome: {
-		fontSize: 25,
-		textAlign: 'center',
-		margin: 10
+	gameActionsContainer: {
+		flex: 2,
+		...Styles.Common.align('center', 'center'),
 	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5
+	startGameButton: {
+		flex:2
 	}
 });
+
+const mapStateToProps = state => ({
+	count: state.getIn(['StoryPlanning', 'counter'])
+});
+const mapActionsToProps = dispatch => ({
+	actions: bindActionCreators(StoryPlanningActionCreators, dispatch)
+});
+
+export default connect(mapStateToProps, mapActionsToProps)(Home);

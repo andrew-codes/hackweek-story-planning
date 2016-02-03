@@ -1,6 +1,6 @@
 import React, { AppRegistry } from 'react-native';
 import withProvider from './app/native/wrappers/withProvider';
-import Router from './app/native/Router';
+import AppRouter from './app/native/AppRouter';
 import createStore from './app/createStore';
 import {ActionCreators as SecurityActionCreators} from './app/features/Security';
 const store = createStore({
@@ -9,4 +9,4 @@ const store = createStore({
 		isAuthenticationInProgress: false
 	}
 });
-AppRegistry.registerComponent('StoryPlanning', () => withProvider(store)(Router));
+AppRegistry.registerComponent('StoryPlanning', () => withProvider(store)(AppRouter));

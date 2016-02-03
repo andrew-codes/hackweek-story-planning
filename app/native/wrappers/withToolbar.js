@@ -1,4 +1,4 @@
-import React, {Component, StyleSheet, View, Text} from 'react-native';
+import React, {PropTypes, Component, StyleSheet, View, Text} from 'react-native';
 import {Actions}  from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {ActionCreators as SecurityActionCreators} from './../../features/Security';
@@ -6,11 +6,25 @@ import Button from 'react-native-button';
 import * as Styles from './../styles';
 
 class Toolbar extends React.Component {
+	static propTypes = {
+		title: PropTypes.node,
+		left: PropTypes.node
+	};
+
+	static defaultProps = {
+		title: '',
+		left: ''
+	};
+
 	render() {
+		const {
+			title,
+			left
+			} = this.props;
 		return (
 			<View style={styles.toolbar}>
-				<Text style={styles.toolbarButton}>Something</Text>
-				<Text style={styles.toolbarTitle}>This is the title</Text>
+				<Text style={styles.toolbarButton}>{left}</Text>
+				<Text style={styles.toolbarTitle}>{title}</Text>
 				<Button style={styles.toolbarButton} onPress={this.props.logout}>Logout</Button>
 			</View>
 		);
@@ -26,11 +40,11 @@ const mapActionsToProps = dispatch => ({
 });
 const ConnectedToolbar = connect(mapStateToProps, mapActionsToProps)(Toolbar);
 
-export default WrappedComponent => class extends Component {
+export default (title, left) => WrappedComponent => class extends Component {
 	render() {
 		return (
-			<View>
-				<ConnectedToolbar />
+			<View style={styles.container}>
+				<ConnectedToolbar title={title} left={left} />
 				<WrappedComponent {...this.props} />
 			</View>
 		);
@@ -38,12 +52,15 @@ export default WrappedComponent => class extends Component {
 };
 
 const styles = StyleSheet.create({
+	container: {
+		...Styles.Common.verticalContainer()
+	},
 	toolbar: {
+		flexDirection: 'row',
 		...Styles.Common.padEdge(),
 		backgroundColor: Styles.Common.Palette.logoPrimary,
 		paddingTop: 30,
-		paddingBottom: 10,
-		flexDirection: 'row'
+		paddingBottom: 10
 	},
 	toolbarButton: {
 		color: '#fff',

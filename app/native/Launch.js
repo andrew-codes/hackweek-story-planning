@@ -1,28 +1,40 @@
-import React, { Component, StyleSheet, View, Text } from 'react-native';
+import React, { PropTypes, Component, StyleSheet, View } from 'react-native';
 import * as Styles from './styles';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {bindActionCreators} from 'redux';
 import {ActionCreators as SecurityActionCreators} from './../features/Security';
 
-class Launch extends Component {
-	componentDidMount(){
-		this.props.login({});
+export class Launch extends Component {
+	static propTypes = {
+		isAuthenticationInProgress: PropTypes.bool,
+		isLoggedIn: PropTypes.bool,
+		navigate: PropTypes.shape({
+			homeScreen: PropTypes.func.isRequired,
+			loginScreen: PropTypes.func.isRequired
+		}).isRequired,
+		actions: PropTypes.shape({
+			login: PropTypes.func.isRequired
+		}).isRequired
+	};
+
+	componentDidMount() {
+		this.props.actions.login({});
 	}
+
 	componentWillReceiveProps(nextProps) {
 		const {
 			isAuthenticationInProgress,
 			isLoggedIn,
-			homeScreen,
-			loginScreen,
+			navigate
 			} = nextProps;
 		if (isAuthenticationInProgress) {
 			return;
 		}
 		if (!isLoggedIn) {
-			loginScreen();
+			navigate.loginScreen();
 		} else {
-			homeScreen();
+			navigate.homeScreen();
 		}
 	}
 
@@ -35,7 +47,7 @@ class Launch extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		...Styles.Common.container(),
+		...Styles.Common.verticalContainer(),
 		backgroundColor: '#F5FCFF'
 	}
 });
@@ -45,8 +57,12 @@ const mapStateToProps = state => ({
 	isAuthenticationInProgress: state.getIn(['Security', 'isAuthenticationInProgress'])
 });
 const mapActionsToProps = dispatch => ({
-	homeScreen: Actions.home,
-	loginScreen: Actions.login,
-	login: bindActionCreators(SecurityActionCreators.login, dispatch)
+	navigate: {
+		homeScreen: Actions.home,
+		loginScreen: Actions.login,
+	},
+	actions: {
+		login: bindActionCreators(SecurityActionCreators.login, dispatch)
+	}
 });
 export default connect(mapStateToProps, mapActionsToProps)(Launch);

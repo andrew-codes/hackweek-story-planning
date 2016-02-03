@@ -6,9 +6,6 @@ import {bindActionCreators} from 'redux';
 import {ActionCreators as SecurityActionCreators} from './../features/Security';
 import * as Styles from './styles';
 
-const login = function() {
-	this.props.actions.login({username: this.state.username, password: this.state.password});
-};
 export class Login extends Component {
 	static propTypes = {
 		actions: PropTypes.shape({
@@ -25,6 +22,9 @@ export class Login extends Component {
 	}
 
 	render() {
+		const {
+			actions: {login}
+			} = this.props;
 		return (
 			<View style={styles.container}>
 				<View style={styles.welcomeWrapper}>
@@ -39,25 +39,28 @@ export class Login extends Component {
 							   onChangeText={(text) => this.setState({password: text})} value={this.state.password} />
 					<View style={styles.buttonContainer}>
 						<Button style={styles.primaryButton}
-								onPress={login.bind(this)}>Login</Button>
+								onPress={login.bind(this, {username: this.state.username, password: this.state.password})}>Login</Button>
 					</View>
 				</View>
 			</View>
-		);
+		)
+			;
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		...Styles.Common.container(),
+		...Styles.Common.verticalContainer(),
 		backgroundColor: 'transparent'
 	},
 	welcomeWrapper: {
 		...Styles.Common.align('center', 'center'),
+		backgroundColor: Styles.Common.Palette.logoPrimary,
 		flex: 1
 	},
 	welcome: {
-		fontSize: 25
+		fontSize: 25,
+		color: Styles.Common.Palette.logoSecondary,
 	},
 	loginFormWrapper: {
 		...Styles.Common.align('center', 'flex-start'),
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
 		borderWidth: 1
 	},
 	buttonContainer: {
-		...Styles.Common.container(),
+		...Styles.Common.verticalContainer(),
 		...Styles.Common.align('stretch', 'flex-start')
 	},
 	primaryButton: {
