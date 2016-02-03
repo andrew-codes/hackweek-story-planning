@@ -1,4 +1,3 @@
-import {Map} from 'immutable';
 import { loadUser as key} from './../actions';
 
 export default {

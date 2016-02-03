@@ -1,4 +1,3 @@
-import {Map} from 'immutable';
 import { signout as key} from './../actions';
 
 export default {

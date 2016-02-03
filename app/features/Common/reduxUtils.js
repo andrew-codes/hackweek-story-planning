@@ -1,4 +1,4 @@
-import {  createStore as reduxCreateStore, applyMiddleware, combineReducers, compose}  from 'redux';
+import {  createStore as reduxCreateStore, applyMiddleware, compose }  from 'redux';
 import devTools from 'remote-redux-devtools';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';

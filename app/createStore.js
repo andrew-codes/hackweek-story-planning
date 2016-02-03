@@ -2,12 +2,12 @@ import Immutable from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { ReduxUtils } from './features/Common';
 
-import { Reducer as StoryPlanning, initializeState as StoryPlannerInitializeState } from './features/StoryPlanning';
-import { Reducer as Security, initializeState as SecurityInitializeState } from './features/Security';
+import { Reducer as Retrospective  } from './features/Retrospective';
+import { Reducer as Security } from './features/Security';
 
 export default (initialState) => {
 	const reducers = {
-		StoryPlanning,
+    Retrospective,
 		Security
 	};
 	const reducer = combineReducers(reducers);

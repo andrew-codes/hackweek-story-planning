@@ -1,7 +1,11 @@
-# Getting Started
+# V1 Sidekick
 
-## iOS
-## Requirements
+V1 Sidekick is your best pal when working with VersionOne. It provides access to all your favorite features of VersionOne; on the go! [Read more](https://github.com/andrew-codes/v1-sidekick/wiki)
+
+# Developing
+
+## Getting Started with iOS App
+### Requirements
 
 1. OSX
 2. Install Homebrew via `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -11,11 +15,11 @@
 6. Install Flow `brew install flow`
 7. Xcode 7.0 or higher
 
-## Running in Simulator
+### Running in Simulator
 
 1. `npm install && npm start`
 2. Open the Xcode project `./ios/StoryPlanning.xcodeproj`
 3. Hit ⌘-R in iOS simulator
 
-## Running on Device
+### Running on Device
 See [Running on Device](http://facebook.github.io/react-native/docs/running-on-device-ios.html#content)

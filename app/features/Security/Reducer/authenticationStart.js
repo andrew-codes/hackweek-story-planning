@@ -1,4 +1,3 @@
-import {Map} from 'immutable';
 import { authenticationStart as key} from './../actions';
 
 export default {

@@ -21,11 +21,15 @@ class Toolbar extends React.Component {
 			title,
 			left
 			} = this.props;
+    const leftComponent = left ? <View style={styles.toolbarButton}>{left}</View>
+      :  <View style={styles.toolbarButton}/>;
+    const titleComponent = title ? <View style={styles.toolbarButton}>{title}</View>
+      : <View style={styles.toolbarTitle}/>;
 		return (
 			<View style={styles.toolbar}>
-				<Text style={styles.toolbarButton}>{left}</Text>
-				<Text style={styles.toolbarTitle}>{title}</Text>
-				<Button style={styles.toolbarButton} onPress={this.props.logout}>Logout</Button>
+        {leftComponent}
+        {titleComponent}
+				<Button style={styles.logoutButton} onPress={this.props.logout}>Logout</Button>
 			</View>
 		);
 	}
@@ -62,15 +66,14 @@ const styles = StyleSheet.create({
 		paddingTop: 30,
 		paddingBottom: 10
 	},
-	toolbarButton: {
-		color: '#fff',
-		textAlign: 'center',
-		fontWeight: 'normal'
+  logoutButton: {
+    alignItems: 'flex-end',
+    flex: 1,
+    color: '#fff'
+  },
+  toolbarButton: {
 	},
 	toolbarTitle: {
-		color: '#fff',
-		textAlign: 'center',
-		fontWeight: 'bold',
 		flex: 1
 	}
 });
