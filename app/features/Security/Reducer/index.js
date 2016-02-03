@@ -1,15 +1,15 @@
+import {handleActions} from 'redux-actions'
 import initializeState from './../initializeState';
-import saveCredentials from './saveCredentials';
+import loadUser from './loadUser';
 import authenticationStart from './authenticationStart';
 import authenticationComplete from './authenticationComplete';
 import logout from './logout';
-import {handleActions} from 'redux-actions'
 
 export default handleActions({
-	...saveCredentials,
-	...logout,
-	...authenticationStart,
-	...authenticationComplete
+  ...logout,
+  ...authenticationStart,
+  ...authenticationComplete,
+  ...loadUser
 }, initializeState());
 
 //for debugging

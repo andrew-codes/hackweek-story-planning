@@ -3,7 +3,7 @@ import {Router, Route, Animations, Schema, Actions} from 'react-native-router-fl
 import {connect} from 'react-redux';
 import withToolbar from './wrappers/withToolbar';
 import Login from './Login';
-import Home from './containers/Home';
+import Home from './Home';
 import Launch from './Launch';
 
 export class AppRouter extends React.Component {
@@ -15,7 +15,7 @@ export class AppRouter extends React.Component {
 				<Schema name="withoutAnimation" />
 				<Route name="login" component={Login} hideNavBar={true} wrapRouter={true} title="Login"
 					   schema="withoutAnimation" />
-				<Route name="home" component={withToolbar(Home)} hideNavBar={true} wrapRouter={true}
+				<Route name="home" component={withToolbar('Home', '')(Home)} hideNavBar={true} wrapRouter={true}
 					   title="Story Planner" schema="withoutAnimation" />
 				<Route name="launch" component={Launch} initial={true} hideNavBar={true} wrapRouter={true}
 					   schema="withoutAnimation"

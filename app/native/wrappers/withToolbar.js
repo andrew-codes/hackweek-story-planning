@@ -3,7 +3,7 @@ import {Actions}  from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {ActionCreators as SecurityActionCreators} from './../../features/Security';
 import Button from 'react-native-button';
-import * as Styles from './../styles';
+import {Layout, Common} from './../styles';
 
 class Toolbar extends React.Component {
 	static propTypes = {
@@ -53,12 +53,12 @@ export default (title, left) => WrappedComponent => class extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		...Styles.Common.verticalContainer()
+		...Layout.verticalContainer()
 	},
 	toolbar: {
 		flexDirection: 'row',
-		...Styles.Common.padEdge(),
-		backgroundColor: Styles.Common.Palette.logoPrimary,
+		...Layout.padEdge(),
+		backgroundColor: Common.Palette.voneRed,
 		paddingTop: 30,
 		paddingBottom: 10
 	},

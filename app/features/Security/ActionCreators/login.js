@@ -1,6 +1,7 @@
-import saveCredentials from './saveCredentials';
 import authenticationStart from './authenticationStart';
 import authenticationComplete from './authenticationComplete';
+import loadUser from './loadUser';
+import saveCredentials from './saveCredentials';
 import {Storage} from './../../../features/Common';
 
 const login = ({username, password}) => dispatch => {
@@ -12,7 +13,7 @@ const login = ({username, password}) => dispatch => {
 					dispatch(authenticate(data));
 					return;
 				}
-				dispatch(authenticationComplete());
+				dispatch(authenticationComplete({isLoggedIn: false}));
 			});
 	}
 	if (username && password) {
@@ -34,8 +35,9 @@ const authenticate = ({username, password}) => dispatch => {
 		})
 	})
 		.then(response => JSON.parse(response._bodyText))
+		.then(data => dispatch(loadUser({username, password, ...data})))
 		.then(() => dispatch(saveCredentials({username, password})))
-		.then(() => dispatch(authenticationComplete()));
+		.then(() => dispatch(authenticationComplete({isLoggedIn: true})));
 };
 
 export default login;
