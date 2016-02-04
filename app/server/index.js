@@ -30,7 +30,9 @@ socket.on('action', ctx => {
     console.log(`No matching action creator for ${actionType}`);
     return;
   }
-  socket.broadcast('action', actionCreator(ctx.data.payload));
+  const payload = actionCreator(ctx.data.payload);
+  console.log(`Dispatching action: ${ctx.data.type} with payload: ${JSON.stringify(payload)}`);
+  socket.broadcast('action', payload);
 });
 
 const port = 3000;

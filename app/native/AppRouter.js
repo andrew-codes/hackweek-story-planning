@@ -26,7 +26,7 @@ export class AppRouter extends React.Component {
                title="Story Planner" schema="withoutAnimation" />
 
         <Route name="retrospectiveHome" component={RetrospectiveHome} hideNavBar={true} wrapRouter={true}
-               title="Retrospective" />
+               title="Retrospective" schema="withoutAnimation" />
       </Router>
     );
   }

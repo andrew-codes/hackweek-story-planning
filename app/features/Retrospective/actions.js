@@ -2,6 +2,7 @@
 export const start = 'retrospective/start';
 export const join = 'retrospective/join';
 export const finish = 'retrospective/finish';
+export const addIdea = 'retrospective/addIdea';
 
 // Internal Actions
 
@@ -9,5 +10,6 @@ export const finish = 'retrospective/finish';
 export const Server = {
   start,
   join,
-  finish
+  finish,
+  addIdea
 };

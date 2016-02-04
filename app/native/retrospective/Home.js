@@ -1,48 +1,35 @@
 import React, { Component, StyleSheet, Text, View } from 'react-native';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Button from 'react-native-button';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import withToolbar from './../wrappers/withToolbar';
 import {Layout, Button as ButtonStyles, Common} from './../styles';
+import Share from './Share';
+import Vote from './Vote';
 
 export class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.actionsContainer}>
-         <Text>Retro Time!</Text>
-        </View>
-      </View>
+      <ScrollableTabView style={styles.tabsContainer} tabBarUnderlineColor={Common.Palette.voneRed}
+                         tabBarActiveTextColor={Common.Palette.voneRed}>
+        <Share tabLabel="Share" style={styles.container} />
+        <Vote tabLabel="Vote" style={styles.container} />
+      </ScrollableTabView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  tabsContainer: {
+    flex: 1,
+    marginTop: 30
+  },
   container: {
-    ...Layout.verticalContainer(),
-    flexDirection: 'column',
-    backgroundColor: Common.Palette.lightGray
-  },
-  actionsContainer: {
-    flex: 1,
-    ...Layout.align('center', 'center')
-  },
-  action: {
-    flex: 1,
-    ...ButtonStyles.primary()
+    flex: 1
   }
 });
 
 const mapStateToProps = state => ({});
-const mapActionsToProps = dispatch => ({
-});
+const mapActionsToProps = dispatch => ({});
 
-
-//const finish = bindActionCreators(RetroActionCreators.finish, dispatch)
-//const finishRetrospective = () => {
-//  finish();
-//  Actions.home();
-//};
-//const finishButton = <Button onPress={finishRetrospective} style={{color: '#fff'}}>Finish</Button>;
-
-export default withToolbar('','')(connect(mapStateToProps, mapActionsToProps)(Home));
+export default connect(mapStateToProps, mapActionsToProps)(Home);

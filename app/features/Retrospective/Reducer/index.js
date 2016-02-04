@@ -3,11 +3,12 @@ import initializeState from './../initializeState';
 import start from './start';
 import join from './join';
 import finish from './finish';
+import addIdea from './addIdea';
 
 export default handleActions({
   ...start,
   ...join,
-  ...finish
+  ...addIdea
 }, initializeState());
 
 //for debugging
