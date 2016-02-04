@@ -10,6 +10,9 @@ import {ActionCreators as RetrospectiveActionCreators} from './../../features/Re
 import {Layout, Fields, Common} from './../styles';
 
 const addIdea = (type, text) => function() {
+  if (!text) {
+    return;
+  }
   this.props.actions.addIdea({type, text});
 };
 export class Share extends Component {
