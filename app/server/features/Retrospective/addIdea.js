@@ -1,7 +1,7 @@
 import {Server as actions} from './../../../features/Retrospective/actions';
 import {createAction} from 'redux-actions';
+import {saveIdea} from './fakeStorage';
 
-let id = 0;
-export const action = idea => ({...idea, id: id++});
+export const action = idea => (saveIdea(idea));
 export const actionType = actions.addIdea;
 export default createAction(actions.addIdea, action);

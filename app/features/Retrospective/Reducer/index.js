@@ -4,11 +4,13 @@ import start from './start';
 import join from './join';
 import finish from './finish';
 import addIdea from './addIdea';
+import initializeData from './initializeData';
 
 export default handleActions({
   ...start,
   ...join,
-  ...addIdea
+  ...addIdea,
+  ...initializeData
 }, initializeState());
 
 //for debugging

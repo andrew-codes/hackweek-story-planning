@@ -5,11 +5,13 @@ export const finish = 'retrospective/finish';
 export const addIdea = 'retrospective/addIdea';
 
 // Internal Actions
+export const initializeData = 'retrospective/initializeData';
 
 // Server (real-time) actions
 export const Server = {
   start,
   join,
   finish,
-  addIdea
+  addIdea,
+  initializeData
 };

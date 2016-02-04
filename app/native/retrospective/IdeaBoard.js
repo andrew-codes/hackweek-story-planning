@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const ideas = state.getIn(['Retrospective', 'ideas']).toArray();
+  console.log(ideas, state.getIn(['Retrospective', 'ideas']));
   const props = {
     ideas: ideas.reduce((output, idea)=> {
       if (!output[idea.type.id]) {

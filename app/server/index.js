@@ -4,6 +4,7 @@ import co from 'co';
 import bodyParser from 'koa-bodyparser';
 import api from './api';
 import actionCreators from './enabledActionCreators';
+import initializeData from './features/Retrospective/initializeData';
 
 let app = new Koa();
 app.use(bodyParser());
@@ -15,7 +16,8 @@ const cleanActionTypeText = (text) => text.replace('server/', '');
 socket.attach(app);
 
 socket.on('connection', ctx => {
-  console.log('Join event', ctx.socket.id)
+  console.log('Join event', ctx.socket.id);
+  ctx.socket.nsp.sockets[ctx.socket.id].emit('action', initializeData());
 });
 
 socket.on('disconnect', ctx => {
