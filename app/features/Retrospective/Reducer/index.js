@@ -6,13 +6,15 @@ import finish from './finish';
 import addIdea from './addIdea';
 import initializeData from './initializeData';
 import addVote from './addVote';
+import removeVote from './removeVote';
 
 export default handleActions({
   ...start,
   ...join,
   ...addIdea,
   ...initializeData,
-  ...addVote
+  ...addVote,
+  ...removeVote
 }, initializeState());
 
 //for debugging

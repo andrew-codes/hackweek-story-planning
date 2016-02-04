@@ -8,3 +8,5 @@ import * as addIdeaCreator from './addIdea';
 export const addIdea = addIdeaCreator;
 import * as addVoteCreator from './addVote';
 export const addVote = addVoteCreator;
+import * as removeVoteCreator from './removeVote';
+export const removeVote = removeVoteCreator;

@@ -23,7 +23,6 @@ export class IdeaBoard extends Component {
       rowIds,
       IdeaComponent
       } = this.props;
-    console.log(ideas);
     const dataSource = this.state.ds.cloneWithRowsAndSections(ideas, sectionIds, rowIds);
     return (
       <ListView style={styles.container} dataSource={dataSource}
@@ -42,7 +41,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const ideas = state.getIn(['Retrospective', 'ideas']).toArray();
-  console.log(ideas, state.getIn(['Retrospective', 'ideas']));
   const props = {
     ideas: ideas.reduce((output, idea)=> {
       if (!output[idea.type.id]) {

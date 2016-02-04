@@ -6,7 +6,6 @@ export default class extends Component {
     const {
       text
       } = this.props;
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <Text>{text}</Text>

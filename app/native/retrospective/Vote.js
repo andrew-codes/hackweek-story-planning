@@ -9,7 +9,7 @@ import IdeaVote from './IdeaVote';
 import {ActionCreators as RetrospectiveActionCreators} from './../../features/Retrospective';
 import {Layout, Fields, Common} from './../styles';
 
-export default class Vote extends Component {
+export class Vote extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -19,10 +19,11 @@ export default class Vote extends Component {
 
   render() {
     const {
-      ideas
+      votesLeft
       } = this.props;
     return (
       <View style={styles.container}>
+        <Text style={styles.votesLeft}>You have {votesLeft} votes left.</Text>
         <IdeaBoard IdeaComponent={IdeaVote} />
       </View>
     );
@@ -32,5 +33,12 @@ export default class Vote extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  votesLeft: {
+    textAlign: 'center',
+    padding: 13
   }
 });
+
+const mapStateToProps = state => ({votesLeft: state.getIn(['Retrospective', 'votesLeft'])});
+export default connect(mapStateToProps)(Vote);

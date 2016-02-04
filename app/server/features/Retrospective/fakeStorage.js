@@ -12,6 +12,9 @@ export const saveIdea = (idea) => {
 export const saveVote = (id, voteCount) => {
   let idea = ideas.find(idea => idea.id === id);
   idea.votes += voteCount;
+  if (idea.votes < 0) {
+    idea.votes = 0;
+  }
   return idea;
 };
 
