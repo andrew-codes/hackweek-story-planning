@@ -6,3 +6,5 @@ import * as finishCreator from './finish';
 export const finish = finishCreator;
 import * as addIdeaCreator from './addIdea';
 export const addIdea = addIdeaCreator;
+import * as addVoteCreator from './addVote';
+export const addVote = addVoteCreator;

@@ -4,13 +4,18 @@ let isInProgress = false;
 let isJoined = false;
 
 export const saveIdea = (idea) => {
-  idea = {...idea, id: id++};
+  idea = {...idea, id: id++, votes: 0};
   ideas.push(idea);
   return idea;
 };
 
-export const clearIdeas = () => (ideas = []);
+export const saveVote = (id, voteCount) => {
+  let idea = ideas.find(idea => idea.id === id);
+  idea.votes += voteCount;
+  return idea;
+};
 
+export const clearIdeas = () => (ideas = []);
 
 export const saveIsJoined = (inProgress, joined) => {
   isInProgress = inProgress;
@@ -21,5 +26,4 @@ export const saveIsJoined = (inProgress, joined) => {
 export const getState = () => ({
   ideas,
   isInProgress
-  //isJoined
 });

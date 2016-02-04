@@ -4,6 +4,7 @@ import * as actions from './actions';
 export default () => {
   return Immutable.fromJS({
     isInProgress: false,
-    ideas: []
+    ideas: [],
+    votesLeft: 5
   });
 };

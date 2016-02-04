@@ -5,12 +5,14 @@ import join from './join';
 import finish from './finish';
 import addIdea from './addIdea';
 import initializeData from './initializeData';
+import addVote from './addVote';
 
 export default handleActions({
   ...start,
   ...join,
   ...addIdea,
-  ...initializeData
+  ...initializeData,
+  ...addVote
 }, initializeState());
 
 //for debugging
