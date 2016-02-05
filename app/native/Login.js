@@ -1,10 +1,11 @@
-import React, { PropTypes, Component, StyleSheet, Text, View, TextInput } from 'react-native';
+import React, { PropTypes, Component, StyleSheet, Text, View, TextInput, Image } from 'react-native';
 import Button from 'react-native-button';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ActionCreators as SecurityActionCreators} from './../features/Security';
 import {Layout, Common, Button as ButtonStyles, Fields} from './styles';
+import logo from './assets/logo.png';
 
 export class Login extends Component {
   static propTypes = {
@@ -27,8 +28,13 @@ export class Login extends Component {
       } = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.welcomeContainer}>
-          <Text style={styles.versionText}>Version</Text><Text style={styles.oneText}>One</Text>
+        <View style={styles.header}>
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.versionText}>Version</Text><Text style={styles.oneText}>One</Text>
+          </View>
+          <View style={styles.logoContainer}>
+            <Image style={styles.logo} source={logo} />
+          </View>
         </View>
         <View style={styles.loginFormContainer}>
           <TextInput placeholder="username" style={styles.textInput} autoCapitalize='none' autoCorrect={false}
@@ -55,26 +61,28 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     ...Layout.align('center', 'center'),
-    backgroundColor: Common.Palette.voneRed,
     flex: 1,
     flexDirection: 'row'
   },
   versionText: {
-    fontSize: 25,
-    color: Common.Palette.voneLighterGray,
+    fontSize: 48,
+    color: Common.Palette.darkGray,
   },
   oneText: {
-    fontSize: 25,
-    color: Common.Palette.voneLightGray,
+    fontSize: 48,
+    color: Common.Palette.voneRed,
   },
   loginFormContainer: {
     ...Layout.align('center', 'flex-start'),
-    flex: 2
+    flex: 2,
+    paddingTop: 24,
+    backgroundColor: Common.Palette.darkGray
   },
   textInput: {
     ...Fields.textField(),
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1,
+    backgroundColor: '#fff'
   },
   buttonContainer: {
     ...Layout.verticalContainer(),
@@ -82,6 +90,17 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     ...ButtonStyles.primary()
+  },
+  header: {
+    flex: 1,
+    flexDirection: 'column',
+    ...Layout.align('center', 'center'),
+    paddingTop: 36,
+    paddingBottom: 36
+  },
+  logo: {
+    width: 148,
+    height: 128
   }
 });
 
