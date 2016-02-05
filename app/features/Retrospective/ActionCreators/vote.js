@@ -3,24 +3,26 @@ import addVote from './addVote';
 import removeVote from './removeVote';
 
 const isAddingVote = votes => votes > 0;
-const haveVotesLeft = votes => votes > 0;
+const haveVotesLeft = votes => votes < 5;
 const isRemovingVote = votes => votes < 0;
-const haveNotMetVoteLimit = votes => votes < 5;
-const ideaHasVotes = idea => idea.votes > 0;
-const canCastVote = (numberOfVotesToCast, votesLeft) => (numberOfVotesToCast !== 0) && ((isAddingVote(numberOfVotesToCast) && haveVotesLeft(votesLeft)) || (isRemovingVote(numberOfVotesToCast) && haveNotMetVoteLimit(votesLeft)));
+const haveVotes = votes => votes > 0;
+const sumVotes = idea => Object.keys(idea.votes).reduce((sum, key) => sum + idea.votes[key], 0);
+const ideaHasVotes = idea => sumVotes(idea) > 0;
+const canCastVote = (numberOfVotesToCast, totalVotes) => (numberOfVotesToCast !== 0) && ((isAddingVote(numberOfVotesToCast) && haveVotesLeft(totalVotes)) || (isRemovingVote(numberOfVotesToCast) && haveVotes(totalVotes)));
 
-export const action = (id, numberOfVotes) => (dispatch, getState) => {
+export const action = (username, id, numberOfVotes) => (dispatch, getState) => {
   const state = getState();
-  const votesLeft = state.getIn(['Retrospective', 'votesLeft']);
-  console.log(numberOfVotes, votesLeft)
-  if (!canCastVote(numberOfVotes, votesLeft)) {
+  const ideas = state.getIn(['Retrospective', 'ideas']);
+  const totalVotes = ideas.reduce((voteSum, idea) => voteSum + idea.votes[username] || 0, 0);
+  console.log(numberOfVotes, totalVotes);
+  if (!canCastVote(numberOfVotes, totalVotes)) {
     return;
   }
-  const idea = state.getIn(['Retrospective', 'ideas']).find(idea => idea.id === id);
+  const idea = ideas.find(idea => idea.id === id);
   if (isAddingVote(numberOfVotes)) {
-    dispatch(addVote(id));
+    dispatch(addVote(username, id));
   } else if (ideaHasVotes(idea)) {
-    dispatch(removeVote(id));
+    dispatch(removeVote(username, id));
   }
 };
 export default action;

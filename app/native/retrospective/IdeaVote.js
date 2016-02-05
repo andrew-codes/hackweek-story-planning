@@ -12,6 +12,7 @@ export class IdeaVote extends Component {
     const {
       id,
       text,
+      username,
       actions:{
         vote
         }
@@ -19,9 +20,9 @@ export class IdeaVote extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{text}</Text>
-        <Button style={styles.vote} onPress={vote.bind(this, id, 1)}><Image style={styles.image}
+        <Button style={styles.vote} onPress={vote.bind(this, username, id, 1)}><Image style={styles.image}
                                                                             source={upVote} /></Button>
-        <Button style={styles.vote} onPress={vote.bind(this, id, -1)}><Image style={styles.image}
+        <Button style={styles.vote} onPress={vote.bind(this, username, id, -1)}><Image style={styles.image}
                                                                              source={downVote} /></Button>
       </View>
     );
@@ -50,7 +51,9 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  username: state.getIn(['Security', 'user', 'username'])
+});
 const mapActionsToProps = dispatch => ({
   actions: {
     vote: bindActionCreators(RetrospectiveActionCreators.vote, dispatch)

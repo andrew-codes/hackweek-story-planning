@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   }
 });
 
+const sumVotes = idea => Object.keys(idea.votes).reduce((sum, key) => sum + idea.votes[key], 0);
 const mapStateToProps = state => ({
-  ideas: state.getIn(['Retrospective', 'ideas']).sort((a,b) => b.votes - a.votes).toArray()
+  ideas: state.getIn(['Retrospective', 'ideas']).sort((a,b) => sumVotes(b) - sumVotes(a)).toArray()
 });
 export default connect(mapStateToProps)(IdeaResultsBoard);

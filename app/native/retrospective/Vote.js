@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import IdeaBoard from './IdeaBoard';
 import IdeaVote from './IdeaVote';
 
+const getVotesLeft = (username, ideas) => ideas.reduce((sum, idea) => sum - (idea.votes[username] || 0), 5);
+
 export class Vote extends Component {
   constructor(props, context) {
     super(props, context);
@@ -14,8 +16,10 @@ export class Vote extends Component {
 
   render() {
     const {
-      votesLeft
+      ideas,
+      username
       } = this.props;
+    const votesLeft = getVotesLeft(username, ideas);
     return (
       <View style={styles.container}>
         <Text style={styles.votesLeft}>You have {votesLeft} votes left.</Text>
@@ -35,5 +39,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({votesLeft: state.getIn(['Retrospective', 'votesLeft'])});
+const mapStateToProps = state => ({
+  ideas: state.getIn(['Retrospective', 'ideas']),
+  username: state.getIn(['Security', 'user', 'username'])
+});
 export default connect(mapStateToProps)(Vote);

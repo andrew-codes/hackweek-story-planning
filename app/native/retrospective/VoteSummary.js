@@ -1,16 +1,18 @@
 import React, { Component, StyleSheet, View, Text } from 'react-native';
 import Button from 'react-native-button';
 
+const sumVotes = votes => Object.keys(votes).reduce((sum, key) => sum + votes[key], 0);
 export default class extends Component {
   render() {
     const {
       text,
       votes
       } = this.props;
+    const sum = sumVotes(votes);
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{text}</Text>
-        <Text style={styles.votes}>{votes}</Text>
+        <Text style={styles.votes}>{sum}</Text>
       </View>
     );
   }
