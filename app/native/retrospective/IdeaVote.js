@@ -1,9 +1,11 @@
-import React, { Component, StyleSheet, View, Text } from 'react-native';
+import React, { Component, StyleSheet, View, Text, Image } from 'react-native';
 import Button from 'react-native-button';
 import {Layout, Button as ButtonStyles, Common} from './../styles';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ActionCreators as RetrospectiveActionCreators} from './../../features/Retrospective';
+import upVote from './assets/arrow-up.png';
+import downVote from './assets/arrow-down.png';
 
 export class IdeaVote extends Component {
   render() {
@@ -17,8 +19,8 @@ export class IdeaVote extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{text}</Text>
-        <Button style={styles.vote} onPress={vote.bind(this, id, 1)}>+1</Button>
-        <Button style={styles.vote} onPress={vote.bind(this, id, -1)}>-1</Button>
+        <Button style={styles.vote} onPress={vote.bind(this, id, 1)}><Image source={upVote} /></Button>
+        <Button style={styles.vote} onPress={vote.bind(this, id, -1)}><Image source={downVote} /></Button>
       </View>
     );
   }
@@ -29,10 +31,12 @@ const styles = StyleSheet.create({
     padding: 7,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   text: {
-    flex: 3
+    flex: 3,
+    fontSize: 24,
   },
   vote: {
     padding: 7,

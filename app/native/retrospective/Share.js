@@ -1,13 +1,11 @@
 import React, { Component, StyleSheet, Text, TextInput, View } from 'react-native';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
-import Button from 'react-native-button';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import IdeaBar from './IdeaBar';
 import IdeaBoard from './IdeaBoard';
 import ReadOnlyIdea from './ReadOnlyIdea';
 import {ActionCreators as RetrospectiveActionCreators} from './../../features/Retrospective';
-import {Layout, Fields, Common} from './../styles';
+import {Fields} from './../styles';
 
 const addIdea = (type, text) => function() {
   if (!text) {

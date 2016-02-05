@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {Layout, Button as ButtonStyles, Common} from './../styles';
 import Share from './Share';
 import Vote from './Vote';
+import Results from './Results';
 
 export class Home extends Component {
   render() {
@@ -14,6 +15,7 @@ export class Home extends Component {
                          tabBarActiveTextColor={Common.Palette.voneRed}>
         <Share tabLabel="Share" style={styles.container} />
         <Vote tabLabel="Vote" style={styles.container} />
+        <Results tabLabel="Results" style={styles.container} />
       </ScrollableTabView>
     );
   }
