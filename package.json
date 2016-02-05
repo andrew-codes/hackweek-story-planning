@@ -1,12 +1,13 @@
 {
-  "name": "StoryPlanning",
+  "name": "SideKICK",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "npm run start:server & npm run start:mobile",
     "start:mobile": "node node_modules/react-native/local-cli/cli.js start",
     "start:server": "nodemon app/server/index.js -- --presets es2015,react,stage-3,stage-2,stage-1,stage-0",
-    "xcode": "open ./ios/StoryPlanning.xcodeproj"
+    "xcode": "open ./ios/SideKICK.xcodeproj",
+    "start:android": "node node_modules/react-native/local-cli/cli.js run-android"
   },
   "dependencies": {
     "babel": "^6.3.26",

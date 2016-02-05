@@ -8,4 +8,4 @@ const store = createStore({
 		isAuthenticationInProgress: false
 	}
 });
-AppRegistry.registerComponent('StoryPlanning', () => withProvider(store)(AppRouter));
+AppRegistry.registerComponent('SideKICK', () => withProvider(store)(AppRouter));

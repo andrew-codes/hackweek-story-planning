@@ -3,6 +3,7 @@ import authenticationComplete from './authenticationComplete';
 import loadUser from './loadUser';
 import saveCredentials from './saveCredentials';
 import {Storage} from './../../../features/Common';
+import address from './../../../../config';
 
 const login = ({username, password}) => dispatch => {
 	dispatch(authenticationStart());
@@ -23,7 +24,7 @@ const login = ({username, password}) => dispatch => {
 };
 
 const authenticate = ({username, password}) => dispatch => {
-	return fetch('http://localhost:3000/api/authenticate', {
+	return fetch(`${address}/api/authenticate`, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
