@@ -19,8 +19,10 @@ export class IdeaVote extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{text}</Text>
-        <Button style={styles.vote} onPress={vote.bind(this, id, 1)}><Image source={upVote} /></Button>
-        <Button style={styles.vote} onPress={vote.bind(this, id, -1)}><Image source={downVote} /></Button>
+        <Button style={styles.vote} onPress={vote.bind(this, id, 1)}><Image style={styles.image}
+                                                                            source={upVote} /></Button>
+        <Button style={styles.vote} onPress={vote.bind(this, id, -1)}><Image style={styles.image}
+                                                                             source={downVote} /></Button>
       </View>
     );
   }
@@ -38,18 +40,15 @@ const styles = StyleSheet.create({
     flex: 3,
     fontSize: 24,
   },
-  vote: {
+  image: {
     padding: 7,
-    fontSize: 24,
     borderRadius: 24,
     height: 48,
     width: 48,
-    color: '#fff',
     backgroundColor: Common.Palette.voneRed,
     marginLeft: 13
   }
 });
-
 
 const mapStateToProps = state => ({});
 const mapActionsToProps = dispatch => ({
